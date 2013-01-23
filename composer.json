@@ -1,0 +1,33 @@
+{
+    "name":"flyingpiranhas/mailer",
+    "type": "library",
+    "description":"The flyingpiranhas mailer library uses SwiftMailer to send, archive and queue emails in a fast and secure manner. See official documentation for demos.",
+    "license": "Apache-2.0",
+    "keywords": ["framework","wireframe", "wireframework", "mailing", "imap"],
+    "homepage": "http://github.com/Swader/flyingpiranhas-mailer",
+    "authors": [
+        {
+            "name": "Bruno Skvorc",
+            "email": "bruno@skvorc.me",
+            "homepage": "http://www.bitfalls.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Ivan Pintar",
+            "email": "pintree.rg@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require":{
+        "php": ">=5.4.0",
+        "swiftmailer/swiftmailer":"v4.3.0",
+        "flyingpiranhas/common": "dev-master",
+        "ext-imap": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "flyingpiranhas\\mailer": "../.."
+        }
+    },
+    "target-dir": ""
+}
