@@ -10,7 +10,7 @@
      * Do not change the version number manually. Doing so may result in general application
      * instability.
      *
-     * @category       common
+     * @category       mailer
      * @package        flyingpiranhas
      * @license        BSD License
      * @version        0.01
