@@ -1,6 +1,6 @@
 <?php
 
-	namespace flyingpiranhas\Mailer\Exceptions;
+	namespace flyingpiranhas\mailer\exceptions;
 
 	/**
 	 * The Mailer Exception class is thrown when

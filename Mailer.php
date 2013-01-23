@@ -3,7 +3,7 @@
     namespace flyingpiranhas\mailer;
 
     use flyingpiranhas\common\utils\Debug;
-    use flyingpiranhas\Mailer\Exceptions\MailerException as MailerException;
+    use flyingpiranhas\mailer\exceptions\MailerException as MailerException;
     use flyingpiranhas\mailer\interfaces\MailRepository as MailRepository;
 
     /**
