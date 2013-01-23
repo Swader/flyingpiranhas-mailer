@@ -1,6 +1,6 @@
 <?php
 
-    namespace flyingpiranhas;
+    namespace flyingpiranhas\mailer;
 
     use flyingpiranhas\common\utils\Debug;
     use flyingpiranhas\Mailer\Exceptions\MailerException as MailerException;
@@ -177,7 +177,7 @@
          *
          * @param int $iValue
          *
-         * @return \flyingpiranhas\mailer
+         * @return Mailer
          * @throws MailerException
          * @since         2012-06-19
          * @author        Bruno Škvorc <bruno@skvorc.me>
@@ -256,7 +256,7 @@
          *
          * @param int|\Swift_Transport $mTransport
          *
-         * @return \flyingpiranhas\mailer
+         * @return Mailer
          * @since         2012-06-19
          * @author        Bruno Škvorc <bruno@skvorc.me>
          */
