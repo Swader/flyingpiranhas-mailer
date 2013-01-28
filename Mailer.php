@@ -409,7 +409,7 @@
                 $message = \Swift_Message::newInstance($aSettings['subject'])->setFrom($aSettings['from'])->setTo(
                     $aSettings['to']
                 )->setBody($aSettings['body']);
-                $this->sendMail($message);
+                $this->iSent = $this->sendMail($message);
                 if ($bArchive) {
                     $this->archiveEmail($message);
                 }
@@ -718,7 +718,9 @@
                 } else {
                     throw new MailerException(
                         'Specified folder does not exist or is not readable
-                        and cannot be used as static attachments folder: ' . $sValue
+                        and cannot be used as static attachments folder: ' . $sValue. '.
+                        For more details about this issue, please see
+                        http://flyingpiranhas.net/docs/mailer/attachments#problems'
                     );
                 }
             }
