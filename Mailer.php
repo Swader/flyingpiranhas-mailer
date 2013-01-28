@@ -393,7 +393,7 @@
             $aSettings['subject'] = (isset($aSettings['subject'])) ? $aSettings['subject'] : 'Express message via FlyingPiranhas Mailer and Swift';
 
             if (!isset($aSettings['from'])) {
-                if (!empty(self::$defaultSender)) {
+                if (empty(self::$defaultSender)) {
                     throw new MailerException(
                         'Please define defaultSender.
                     See http://www.flyingpiranhas.net/docs/mailer/defaultsender for more information.'
@@ -916,7 +916,7 @@
         protected function checkService()
         {
             if ($this->oRepo === null) {
-                throw new MailerException('The Mailer Service needs to be provided, and must implement the MailerService Interface.');
+                throw new MailerException('A Repo needs to be provided, and must implement the MailRepository Interface.');
             }
         }
     }

@@ -8,6 +8,27 @@ The FlyingPiranhas mailer library is part of the [FlyingPiranhas](http://www.fly
 ####Mailer
 This is the _mailer_ library, meaning it focuses solely on advanced emailing functionality.
 
+####Usage
+Before sending, you must call `Mailer::setDeveloperRecipient()` on the current instance of the Mailer class.
+This is a safety measure - it enables sending. If you pass in an email as the parameter, that email will
+override all recipients and receive emails instead of the originally intended ones. This is useful for testing
+bulk email functionality without quasi-spamming your users. To deactivate this measure, simply call the method
+with no parameters.
+
+Mailer supports "express email" functionality via the method expressMail.
+This method requires an array containing "to" and "body", and optionally "subject" and "from".
+If "from" is omitted, it should be provided via the static method `Mailer::setDefaultSender()`
+The expressMail method works without a Repo by default, as long as you leave the second param
+at false. As soon as the second param is true, it will try to archive the sent email and will fail unless
+you provide a Repo class for it to work with. It is important to note that the email still gets sent,
+only the archiving fails with an exception.
+
+Regular email sending works via `Mailer::prepareEmail()`, but requires a Repo
+Just pass in the required params and call either `sendPreparedEmails` or `queuePreparedEmails`.
+Send will instantly send the email and archive it as sent. Queue will place it in the Repo queue
+for later retrieval and sending. Once a queued email was sent, it is marked as such. For more info
+and demos, please see the homepage and in-depth documentation (coming soon).
+
 ####Requirements
 - Php 5.4+
 - Swift Mailer (add "swiftmailer/swiftmailer":"v4.3.0" (or higher) to your composer.json file's require block)
