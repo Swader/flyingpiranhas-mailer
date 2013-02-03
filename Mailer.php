@@ -20,6 +20,7 @@
      * @version       0.01
      * @since         2012-06-19
      * @author        Bruno Škvorc <bruno@skvorc.me>
+     * @todo: Archiving flags, default BCC flags
      */
     class Mailer
     {
@@ -117,6 +118,11 @@
          */
         protected $iSent = 0;
 
+        /** @var string */
+        protected $sArchiveAddress;
+
+
+
         /**
          * The constructor accepts a valid MailRepository instance for communication with a given
          * database of other kind of Repo.
@@ -139,6 +145,30 @@
             }
 
             $this->oMailer = \Swift_Mailer::newInstance($this->getTransport());
+        }
+
+        /**
+         * Defines to which archive inbox to send BCC copies of all sent emails.
+         * Leave empty to disable.
+         *
+         * @param string $sArchiveAddress
+         * @throws exceptions\MailerException
+         */
+        public function setArchiveAddress($sArchiveAddress) {
+            if (filter_var($sArchiveAddress, FILTER_VALIDATE_EMAIL)) {
+                $this->sArchiveAddress = $sArchiveAddress;
+            } else {
+                throw new MailerException('The archival email '.$sArchiveAddress.' is not a valid email.');
+            }
+        }
+
+        /**
+         * Returns the archive address set by setArchiveAddress
+         *
+         * @return string
+         */
+        public function getArchiveAddress() {
+            return $this->sArchiveAddress;
         }
 
         /**
@@ -590,7 +620,7 @@
                 $message->setFrom($mFrom);
 
                 if ($this->bDefaultBccActive) {
-                    $message->addBcc('mail-archive@intechopen.com');
+                    $message->addBcc($this->sArchiveAddress);
                 }
 
                 if (!empty($aHeaders)) {
