@@ -117,6 +117,12 @@
          */
         protected $iSent = 0;
 
+        /**
+         * The constructor accepts a valid MailRepository instance for communication with a given
+         * database of other kind of Repo.
+         *
+         * @param interfaces\MailRepository $oRepo
+         */
         public function __construct(MailRepository $oRepo = null)
         {
             $this->aPreparedEmails = array();
@@ -252,7 +258,13 @@
         }
 
         /**
-         * Sets the transport. Defaults to localhost
+         * Sets the transport. Defaults to 127.0.0.1
+         * To use a custom transport, pass an instance of Swift_Transport
+         * To use a custom SmtpTransport host, just pass in the hostname
+         *
+         * Otherwise, there are two predefined cases possible:
+         * 1: \Swift_SmtpTransport (127.0.0.1)
+         * 2: \Swift_MailTransport
          *
          * @param int|\Swift_Transport $mTransport
          *
@@ -260,7 +272,7 @@
          * @since         2012-06-19
          * @author        Bruno Škvorc <bruno@skvorc.me>
          */
-        public function setTransport($mTransport = 3)
+        public function setTransport($mTransport = 1)
         {
             if (is_a($mTransport, '\Swift_Transport')) {
                 $this->oTransport = $mTransport;
@@ -269,12 +281,9 @@
                     switch ($mTransport) {
                         default:
                         case 1:
-                            $this->oTransport = new \Swift_SmtpTransport();
-                            break;
-                        case 2:
                             $this->oTransport = new \Swift_SmtpTransport('127.0.0.1');
                             break;
-                        case 3:
+                        case 2:
                             $this->oTransport = \Swift_MailTransport::newInstance();
                             break;
                     }
@@ -321,8 +330,6 @@
                     throw new MailerException('Developer recipient is set but invalid. Sending will not happen');
                 }
             }
-
-            // ===================================
 
             return $this->oMailer->send($oMessage, $this->aFailedRecipients[$oMessage->getId()]);
         }

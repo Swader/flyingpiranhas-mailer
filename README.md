@@ -29,6 +29,18 @@ Send will instantly send the email and archive it as sent. Queue will place it i
 for later retrieval and sending. Once a queued email was sent, it is marked as such. For more info
 and demos, please see the homepage and in-depth documentation (coming soon).
 
+####Templates and demos
+Apart from the main site, there's a default MySQL/MariaDB Repo in the /fp subfolder. There's also an SQL
+script file there (and a workbench model), which you can use to build a MySQL/MariaDB Repo.
+Inject the Repo into the Mailer class and you have a working MySQL Mailer implementation ready for use in any project.
+Alternatively, use the Repo class to build your own, and inject that one. As long as it implements the MailRepository
+interface, it's all good.
+There will also be a PostreSQL demo Repo soon in the same folder, ready for production use.
+Note that the current demo repos extend the adapters from fp/common.
+
+It is recommended you keep a separate schema for the email database as it will make backups and restorations
+much simpler.
+
 ####Requirements
 - Php 5.4+
 - Swift Mailer (add "swiftmailer/swiftmailer":"v4.3.0" (or higher) to your composer.json file's require block)
